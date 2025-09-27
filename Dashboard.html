@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SecureAudit Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">🔒</div>
+      <div class="app-name">
+        <h2>SecureAudit</h2>
+        <small>Enterprise Security</small>
+      </div>
+    </div>
+    <nav class="main-nav">
+      <h4>MAIN NAVIGATION</h4>
+      <ul>
+        <li class="active"><a href="#dashboard"><span>🏠</span> Dashboard</a></li>
+        <li><a href="#assets"><span>📦</span> Assets</a></li>
+        <li><a href="#scan-results"><span>⏱️</span> Scan Results</a></li>
+        <li><a href="#settings"><span>⚙️</span> Settings</a></li>
+      </ul>
+    </nav>
+    <div class="sidebar-footer">
+      <img src="user-avatar.png" alt="User Avatar" class="avatar" />
+      <div class="user-info">
+        <div class="user-name">Security Admin</div>
+        <div class="user-email">admin@company.com</div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="section dashboard">
+      <header>
+        <h1>Dashboard</h1>
+        <p>Real-time security and compliance monitoring</p>
+        <div class="header-icons">
+          <button class="icon-btn bell" aria-label="Notifications">🔔<span class="badge">1</span></button>
+          <img src="user-avatar.png" alt="User Avatar" class="header-avatar" />
+        </div>
+      </header>
+
+      <div class="metrics">
+        <div class="metric card blue">
+          <h3>Total Assets Monitored</h3>
+          <div class="metric-value">142</div>
+          <div class="metric-change positive">+12%</div>
+        </div>
+        <div class="metric card red">
+          <h3>Critical Vulnerabilities</h3>
+          <div class="metric-value">12</div>
+          <div class="metric-change negative">-3%</div>
+        </div>
+        <div class="metric card green">
+          <h3>Compliance Score</h3>
+          <div class="metric-value">85%</div>
+          <div class="metric-change positive">+5%</div>
+        </div>
+        <div class="metric card orange">
+          <h3>Last Scan</h3>
+          <div class="metric-value">2 hours ago</div>
+        </div>
+      </div>
+
+      <div class="charts">
+        <div class="chart vulnerabilities">
+          <h2>Vulnerabilities by Severity</h2>
+          <canvas id="vulnChart"></canvas>
+          <ul class="chart-legend">
+            <li><span class="dot red"></span> Critical</li>
+            <li><span class="dot orange"></span> High</li>
+            <li><span class="dot yellow"></span> Medium</li>
+            <li><span class="dot blue"></span> Low</li>
+          </ul>
+        </div>
+        <div class="chart compliance">
+          <h2>Compliance Status</h2>
+          <canvas id="complianceChart"></canvas>
+        </div>
+      </div>
+
+      <div class="recent-scans high-risk">
+        <section class="recent-scans-section">
+          <h2>Recent Scans</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Scan ID</th>
+                <th>Date</th>
+                <th>Targets</th>
+                <th>Status</th>
+                <th>Findings</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>scan-12345</td>
+                <td>2025-01-15</td>
+                <td>3</td>
+                <td><span class="status completed">Completed</span></td>
+                <td class="critical">27</td>
+                <td><button disabled>View</button></td>
+              </tr>
+              <tr>
+                <td>scan-12344</td>
+                <td>2025-01-14</td>
+                <td>1</td>
+                <td><span class="status completed">Completed</span></td>
+                <td class="high">5</td>
+                <td><button disabled>View</button></td>
+              </tr>
+              <tr>
+                <td>scan-12343</td>
+                <td>2025-01-14</td>
+                <td>15</td>
+                <td><span class="status in-progress">In Progress</span></td>
+                <td class="low">0</td>
+                <td><button disabled>View</button></td>
+              </tr>
+              <tr>
+                <td>scan-12342</td>
+                <td>2025-01-13</td>
+                <td>8</td>
+                <td><span class="status completed">Completed</span></td>
+                <td class="medium">12</td>
+                <td><button disabled>View</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="high-risk-assets">
+          <h2>High-Risk Assets</h2>
+          <ul>
+            <li>
+              <span class="asset-name">prod-web-server-01</span><br />
+              <small>EC2 Instance</small>
+              <span class="risk critical">3 Critical</span>
+            </li>
+            <li>
+              <span class="asset-name">db-prod-main</span><br />
+              <small>RDS Database</small>
+              <span class="risk critical">1 Critical</span>
+            </li>
+            <li>
+              <span class="asset-name">prod-login-api</span><br />
+              <small>EC2 Instance</small>
+              <span class="risk critical">1 Critical</span>
+            </li>
+          </ul>
+        </section>
+      </div>
+    </section>
+
+    <!-- Assets Section -->
+    <section id="assets" class="section assets">
+      <header>
+        <h1>Assets</h1>
+        <p>Real-time security and compliance monitoring</p>
+      </header>
+
+      <h2>Asset Management</h2>
+      <p>Discover, manage, and audit your cloud infrastructure assets.</p>
+
+      <div class="asset-controls">
+        <input type="search" placeholder="Search assets by name or ID..." />
+        <button>Filters</button>
+        <button class="primary">Start Audit (0)</button>
+      </div>
+
+      <table class="asset-table">
+        <thead>
+          <tr>
+            <th><input type="checkbox" /></th>
+            <th>Asset Name / ID</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Compliance</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="selected">
+            <td><input type="checkbox" checked></td>
+            <td><strong>prod-web-server-01</strong><br /><small>i-0123abcd</small></td>
+            <td>EC2 Instance</td>
+            <td><span class="status running">Running</span></td>
+            <td><span class="compliance failing">Failing</span></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td><strong>customer-data-bucket-xyz</strong><br /><small>s3-customer-data</small></td>
+            <td>S3 Bucket</td>
+            <td><span class="status running">Running</span></td>
+            <td><span class="compliance failing">Failing</span></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td><strong>prod-main-database</strong><br /><small>db-prod-main</small></td>
+            <td>RDS Database</td>
+            <td><span class="status running">Running</span></td>
+            <td><span class="compliance passing">Passing</span></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td><strong>dev-test-instance</strong><br /><small>i-0456efgh</small></td>
+            <td>EC2 Instance</td>
+            <td><span class="status stopped">Stopped</span></td>
+            <td><span class="compliance passing">Passing</span></td>
+          </tr>
+          <tr>
+            <td><input type="checkbox" /></td>
+            <td><strong>application-logs-bucket</strong><br /><small>s3-app-logs</small></td>
+            <td>S3 Bucket</td>
+            <td><span class="status running">Running</span></td>
+            <td><span class="compliance passing">Passing</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <aside class="asset-details">
+        <h3>prod-web-server-01</h3>
+        <small>i-0123abcd</small>
+
+        <nav class="tab-nav">
+          <button class="active">Overview</button>
+          <button disabled>Security</button>
+          <button disabled>Monitoring</button>
+        </nav>
+
+        <div class="asset-info">
+          <p><strong>Type:</strong> EC2 Instance</p>
+          <p><strong>Status:</strong> <span class="status running">Running</span></p>
+          <p><strong>Region:</strong> us-east-1</p>
+          <p><strong>IP:</strong> 172.31.16.8</p>
+          <p><strong>Tags:</strong> <span class="tag">web</span> <span class="tag">prod</span></p>
+        </div>
+
+        <button class="primary">Rescan Asset</button>
+        <button disabled>View Logs</button>
+      </aside>
+    </section>
+
+    <!-- Scan Results Section -->
+    <section id="scan-results" class="section scan-results">
+      <header>
+        <h1>ScanResults</h1>
+        <p>Real-time security and compliance monitoring</p>
+      </header>
+
+      <div class="scan-summary card">
+        <div class="scan-status completed">✔ Completed</div>
+        <span class="scan-time">4m 32s</span>
+
+        <h2>Scan Report: scan-12345</h2>
+        <p>
+          📅 January 15, 2025 &nbsp; ⏰ 14:30 UTC &nbsp; 👁️ 3 assets &nbsp; ⚠️ 27 findings
+        </p>
+
+        <div class="doughnut-charts">
+          <div class="chart-container">
+            <canvas id="vulnerabilitiesDoughnut"></canvas>
+            <p>Vulnerabilities</p>
+          </div>
+          <div class="chart-container">
+            <canvas id="complianceDoughnut"></canvas>
+            <p>Compliance</p>
+          </div>
+          <div class="total-issues">
+            <strong>27</strong> Total Issues
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn-primary">Export PDF</button>
+          <button disabled>Schedule Rescan</button>
+        </div>
+      </div>
+
+      <div class="severity-cards">
+        <div class="severity-card critical">
+          <h3>4</h3>
+          <p>Critical</p>
+        </div>
+        <div class="severity-card high">
+          <h3>8</h3>
+          <p>High</p>
+        </div>
+        <div class="severity-card medium">
+          <h3>15</h3>
+          <p>Medium</p>
+        </div>
+        <div class="severity-card compliance-passed">
+          <h3>210</h3>
+          <p>Compliance Passed</p>
+        </div>
+      </div>
+
+      <div class="tabs">
+        <button class="active">Vulnerabilities (27)</button>
+        <button disabled>Compliance (38)</button>
+      </div>
+
+      <div class="findings-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Severity</th>
+              <th>Finding</th>
+              <th>Asset</th>
+              <th>CVSS</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="severity-label critical">Critical</span></td>
+              <td>
+                <strong>SQL Injection in <code>login.php</code></strong><br />
+                <small>CVE-2023-1234</small>
+              </td>
+              <td>prod-web-server-01</td>
+              <td class="critical">9.8</td>
+              <td>
+                <button disabled>👁 Details</button>
+                <button disabled>↗ Report</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="severity-label high">High</span></td>
+              <td><strong>Open Port: 3306 (MySQL)</strong></td>
+              <td>db-prod-main</td>
+              <td class="high">7.5</td>
+              <td>
+                <button disabled>👁 Details</button>
+                <button disabled>↗ Report</button>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="severity-label medium">Medium</span></td>
+              <td><strong>Cross-Site Scripting (XSS)</strong></td>
+              <td>prod-web-server-01</td>
+              <td class="medium">6.1</td>
+              <td>
+                <button disabled>👁 Details</button>
+                <button disabled>↗ Report</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="findings-filter">
+          <input type="search" placeholder="Filter findings..." />
+          <button disabled>Filter</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Settings Section -->
+    <section id="settings" class="section settings">
+      <header>
+        <h1>Settings</h1>
+        <p>Real-time security and compliance monitoring</p>
+      </header>
+
+      <div class="settings-container">
+        <div class="settings-general card">
+          <h2>General</h2>
+          <label for="orgName">Organization Name</label>
+          <input type="text" id="orgName" value="Acme Corporation" />
+        </div>
+
+        <div class="settings-notifications card">
+          <h2>Notifications</h2>
+          <label><span>Critical Alerts</span><input type="checkbox" checked /></label>
+          <label><span>Scan Reports</span><input type="checkbox" checked /></label>
+          <label><span>Weekly Summaries</span><input type="checkbox" /></label>
+        </div>
+
+        <div class="settings-user-management card">
+          <h2>User Management <button class="primary invite-btn">Invite User</button></h2>
+          <table>
+            <thead>
+              <tr><th>User</th><th>Role</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <img src="user-avatar.png" alt="Security Admin" class="small-avatar" />
+                    <div>
+                      <div>Security Admin</div>
+                      <div class="email">admin@company.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Admin</td>
+                <td><button>Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <span class="avatar-placeholder">▲</span>
+                    <div>
+                      <div>Dev Ops</div>
+                      <div class="email">devops@company.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Editor</td>
+                <td><button>Edit</button></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="user-cell">
+                    <span class="avatar-placeholder">🏠</span>
+                    <div>
+                      <div>John Doe</div>
+                      <div class="email">john.doe@company.com</div>
+                    </div>
+                  </div>
+                </td>
+                <td>Viewer</td>
+                <td><button>Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="settings-integrations card">
+          <h2>Integrations</h2>
+          <ul>
+            <li>
+              <span>Slack</span>
+              <button>Connect</button>
+            </li>
+            <li>
+              <span>Jira</span>
+              <button>Connect</button>
+            </li>
+          </ul>
+        </div>
+
+        <div class="settings-api-keys card">
+          <h2>API Keys</h2>
+          <p>No API keys generated yet.</p>
+          <button class="primary">Generate Key</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- You can add your scripts here -->
+  <script src="scripts.js"></script>
+</body>
+</html>
